@@ -1,0 +1,24 @@
+prefix cs <http://openprovenance.org/ns/creditscoring#>
+prefix pl <http://openprovenance.org/ns/plead#>
+prefix app <https://explain.openprovenance.org/creditscoring/>
+
+select * from decision a prov:Entity
+
+from wat a prov:WasAttributedTo
+ join decision.id = wat.entity
+
+from officer a prov:Agent
+ join wat.agent = officer.id
+
+from gen a prov:WasGeneratedBy
+ join decision.id = gen.entity
+
+from review a prov:Activity
+ join gen.activity = review.id
+
+from waw a prov:WasAssociatedWith
+ join review.id = waw.activity
+
+where decision[prov:type] >= 'pl:HumanDecision'
+and officer[prov:type] >= 'prov:Person'
+and review[prov:type] >= 'pl:HumanLedActivity'

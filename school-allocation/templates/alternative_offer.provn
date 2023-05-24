@@ -1,0 +1,48 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix sa <http://openprovenance.org/ns/school-admission#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    agent(var:school, [prov:type='sa:School', prov:type='var:school_type', tmpl:label='var:school_name'])
+    entity(var:admission_policy, [
+      prov:type='sa:AdmissionPolicy',
+      sa:pan='var:pan',
+      sa:year='var:year'
+    ])
+    wasAttributedTo(var:admission_policy, var:school)
+
+    agent(var:staff, [
+      prov:type='prov:Person',
+      prov:type='sa:SchoolAdmissionOfficer'
+    ])
+    activity(vargen:allocating, -, -, [
+      prov:type='pl:HumanLedActivity',
+      prov:type='sa:AllocatingAlternativeSchoolPlace',
+      tmpl:startTime='var:startTime',
+      tmpl:endTime='var:endTime'
+    ])
+    wasAssociatedWith(vargen:allocating, var:staff, -)
+    actedOnBehalfOf(var:staff, var:school, vargen:allocating)
+    used(vargen:allocating, var:admission_policy, -)
+    wasStartedBy(vargen:allocating, var:waiting_list_place, -, -)
+
+    entity(var:offer, [
+      prov:type='pl:Decision',
+      prov:type='pl:HumanDecision',
+      prov:type='sa:AlternativeSchoolPlaceOffer',
+      sa:year='var:year',
+      sa:school='var:school',
+      sa:child='var:child',
+      sa:child_name='var:child_name'
+    ])
+    wasGeneratedBy(var:offer, vargen:allocating, -)
+    wasDerivedFrom(var:offer, var:admission_policy)
+    wasAttributedTo(var:offer, var:staff)
+    wasDerivedFrom(var:offer, var:waiting_list_place)
+  endBundle
+
+endDocument

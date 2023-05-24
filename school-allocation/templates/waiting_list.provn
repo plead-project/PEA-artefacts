@@ -1,0 +1,28 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix sa <http://openprovenance.org/ns/school-admission#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    entity(var:admission_policy)
+    entity(var:rank_position)
+    entity(var:waiting_list_place, [
+      prov:type='pl:Decision',
+      prov:type='pl:RejectionDecision',
+      prov:type='pl:AutomatedDecision',
+      prov:type='sa:WaitingListPlace',
+      sa:waiting_list_rank='var:waiting_list_rank',
+      sa:year='var:year',
+      sa:school='var:school',
+      sa:child='var:child',
+      sa:child_name='var:child_name'
+    ])
+    wasDerivedFrom(var:waiting_list_place, var:rank_position)
+    wasDerivedFrom(var:waiting_list_place, var:admission_policy)
+    wasAttributedTo(var:waiting_list_place, var:school)
+  endBundle
+
+endDocument

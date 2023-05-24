@@ -1,0 +1,30 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix sa <http://openprovenance.org/ns/school-admission#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    entity(var:admission_policy)
+    entity(var:rank_position)
+    entity(var:offer, [
+      prov:type='pl:Decision',
+      prov:type='pl:AutomatedDecision',
+      prov:type='sa:SchoolPlaceOffer',
+      sa:year='var:year',
+      sa:school='var:school',
+      sa:child='var:child',
+      sa:child_name='var:child_name'
+    ])
+    wasDerivedFrom(var:offer, var:rank_position)
+    wasDerivedFrom(var:offer, var:admission_policy)
+    wasAttributedTo(var:offer, var:school)
+
+    // This offer was made due to no availability for the applicant's higher prefenrence(s)
+    // (i.e. existence of waiting list place(s))
+    wasDerivedFrom(var:offer, var:waiting_list_place)
+  endBundle
+
+endDocument

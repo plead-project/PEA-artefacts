@@ -1,0 +1,39 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix cs <http://openprovenance.org/ns/creditscoring#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    agent(var:credit_provider, [
+      prov:type='prov:Organization',
+      prov:type='pl:DataController',
+      prov:type='var:credit_provider_type',
+      tmpl:label='var:credit_provider_label'
+    ])
+    entity(var:application)
+    activity(vargen:processing_application, -, -, [
+      prov:type='cs:AssessingCreditApplication',
+      prov:type='var:processing_type',
+      tmpl:startTime='var:startTime',
+      tmpl:endTime='var:endTime'
+    ])
+    wasAssociatedWith(vargen:processing_application, var:credit_provider, -)
+    used(vargen:processing_application, var:application, -)
+
+    entity(var:decision, [
+      prov:type='var:decision_type',
+      prov:type='cs:CreditDecision',
+      prov:type='pl:Decision',
+      cs:result='var:decision_result',
+      pl:reason='var:decision_reason',
+      pl:created_at='var:timestamp'
+    ])
+    wasAttributedTo(var:decision, var:credit_provider)
+    wasGeneratedBy(var:decision, vargen:processing_application, -)
+    wasDerivedFrom(var:decision, var:application, vargen:processing_application, -, -)
+  endBundle
+
+endDocument

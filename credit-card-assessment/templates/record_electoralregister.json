@@ -1,0 +1,81 @@
+{
+  "prefix": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "vargen": "http://openprovenance.org/vargen#",
+    "tmpl": "http://openprovenance.org/tmpl#",
+    "var": "http://openprovenance.org/var#",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "bundle": {
+    "vargen:b": {
+      "agent": {
+        "var:provider": {
+          "prov:type": [
+            {
+              "$": "cs:DataProvider",
+              "type": "prov:QUALIFIED_NAME"
+            },
+            {
+              "$": "var:provider_type",
+              "type": "prov:QUALIFIED_NAME"
+            }
+          ],
+          "tmpl:label": {
+            "$": "var:provider_label",
+            "type": "prov:QUALIFIED_NAME"
+          }
+        }
+      },
+      "prefix": {
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "prov": "http://www.w3.org/ns/prov#",
+        "cs": "http://openprovenance.org/ns/creditscoring#",
+        "pl": "http://openprovenance.org/ns/plead#"
+      },
+      "wasAttributedTo": {
+        "_:wAT1": {
+          "prov:entity": "var:record",
+          "prov:agent": "var:provider"
+        }
+      },
+      "entity": {
+        "var:record": {
+          "pl:created_at": {
+            "$": "var:timestamp",
+            "type": "prov:QUALIFIED_NAME"
+          },
+          "cs:attr_address": {
+            "$": "var:address",
+            "type": "prov:QUALIFIED_NAME"
+          },
+          "prov:type": [
+            {
+              "$": "pl:Data",
+              "type": "prov:QUALIFIED_NAME"
+            },
+            {
+              "$": "pl:ExternalData",
+              "type": "prov:QUALIFIED_NAME"
+            },
+            {
+              "$": "cs:ElectoralRegisterEntry",
+              "type": "prov:QUALIFIED_NAME"
+            },
+            {
+              "$": "var:record_type",
+              "type": "prov:QUALIFIED_NAME"
+            }
+          ],
+          "cs:attr_from_date": {
+            "$": "var:from_date",
+            "type": "prov:QUALIFIED_NAME"
+          },
+          "cs:attr_to_date": {
+            "$": "var:to_date",
+            "type": "prov:QUALIFIED_NAME"
+          }
+        }
+      }
+    }
+  }
+}

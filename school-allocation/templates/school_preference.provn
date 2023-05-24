@@ -1,0 +1,21 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix sa <http://openprovenance.org/ns/school-admission#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    entity(var:application)
+    entity(var:preference, [
+      prov:type='pl:Data',
+      prov:type='sa:SchoolPlacePreference',
+      sa:preference_order='var:order',
+      sa:school='var:school',
+      sa:school_name='var:school_name'
+    ])
+    wasDerivedFrom(var:preference, var:application)
+  endBundle
+
+endDocument

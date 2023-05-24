@@ -1,0 +1,48 @@
+prefix pl <http://openprovenance.org/ns/plead#>
+prefix sa <http://openprovenance.org/ns/school-admission#>
+prefix app <https://explain.openprovenance.org/school-admission/>
+
+select * from waiting_place a prov:Entity
+
+from der1 a prov:WasDerivedFrom
+ join waiting_place.id = der1.generatedEntity
+
+from rank_position a prov:Entity
+ join der1.usedEntity = rank_position.id
+
+from der2 a prov:WasDerivedFrom
+ join rank_position.id = der2.generatedEntity
+
+from preference a prov:Entity
+ join der2.usedEntity = preference.id
+
+from der3 a prov:WasDerivedFrom
+ join waiting_place.id = der3.generatedEntity
+
+from policy a prov:Entity
+ join der3.usedEntity = policy.id
+
+from attr1 a prov:WasAttributedTo
+ join waiting_place.id = attr1.entity
+
+from school a prov:Agent
+ join attr1.agent = school.id
+
+from der4 a prov:WasDerivedFrom
+ join preference.id = der4.generatedEntity
+
+from application a prov:Entity
+ join der4.usedEntity = application.id
+
+where waiting_place[prov:type] >= 'sa:WaitingListPlace'
+ and  rank_position[prov:type] >= 'sa:SchoolPlaceRankedPosition'
+ and  preference[prov:type]    >= 'sa:SchoolPlacePreference'
+ and  policy[prov:type]        >= 'sa:AdmissionPolicy'
+ and  school[prov:type]        >= 'sa:School'
+ and  application[prov:type]   >= 'sa:SchoolPlaceApplication'
+ 
+group by application aggregate policy, school, rank_position, waiting_place with Seq
+
+
+
+

@@ -1,0 +1,36 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix sa <http://openprovenance.org/ns/school-admission#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    agent(var:applicant, [
+      prov:type='prov:Person',
+      prov:type='sa:ChildGuardian',
+      prov:type='pl:DataSubject',
+      tmpl:label='var:applicant_name'
+    ])
+    entity(var:application, [
+      prov:type='pl:Data',
+      prov:type='pl:SubjectData',
+      prov:type='pl:Request',
+      prov:type='sa:SchoolPlaceApplication',
+      sa:year='var:school_year',
+      sa:child='var:child',
+      sa:child_name='var:child_name',
+      pl:created_at='var:timestamp'
+    ])
+    agent(var:child, [
+      prov:type='prov:Person',
+      prov:type='pl:DataSubject',
+      prov:type='sa:Child',
+      tmpl:label='var:child_name'
+    ])
+    wasAttributedTo(var:application, var:applicant)
+    actedOnBehalfOf(var:applicant, var:child, -)
+  endBundle
+
+endDocument

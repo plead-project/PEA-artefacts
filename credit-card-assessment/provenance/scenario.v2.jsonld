@@ -1,0 +1,1177 @@
+{
+  "@context": [
+    {
+      "cs": "http://openprovenance.org/ns/creditscoring#",
+      "app": "https://explain.openprovenance.org/creditscoring/",
+      "ex": "http://example.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "pl": "http://openprovenance.org/ns/plead#",
+      "prov": "http://www.w3.org/ns/prov#"
+    },
+    {
+      "agent": {
+        "@id": "prov:agent",
+        "@type": "@id"
+      },
+      "activity": {
+        "@id": "prov:activity",
+        "@type": "@id"
+      },
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "prov:Invalidation": {
+        "@id": "prov:Invalidation",
+        "@context": {
+          "entity": {
+            "@reverse": "prov:qualifiedInvalidation",
+            "@type": "@id"
+          },
+          "time": {
+            "@id": "prov:atTime",
+            "@type": "xsd:dateTime"
+          }
+        }
+      },
+      "prov:Attribution": {
+        "@id": "prov:Attribution",
+        "@context": {
+          "entity": {
+            "@reverse": "prov:qualifiedAttribution",
+            "@type": "@id"
+          }
+        }
+      },
+      "prov:Usage": {
+        "@id": "prov:Usage",
+        "@context": {
+          "activity": {
+            "@reverse": "prov:qualifiedUsage",
+            "@type": "@id"
+          },
+          "time": {
+            "@id": "prov:atTime",
+            "@type": "xsd:dateTime"
+          }
+        }
+      },
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "prov:QualifiedSpecialization": {
+        "@id": "prov:QualifiedSpecialization",
+        "@context": {
+          "specificEntity": {
+            "@reverse": "prov:qualifiedSpecialization",
+            "@type": "@id"
+          },
+          "generalEntity": {
+            "@id": "prov:entity",
+            "@type": "@id"
+          }
+        }
+      },
+      "prov:QualifiedAlternate": {
+        "@id": "prov:QualifiedAlternate",
+        "@context": {
+          "alternate1": {
+            "@reverse": "prov:qualifiedAlternate",
+            "@type": "@id"
+          },
+          "alternate2": {
+            "@id": "prov:entity",
+            "@type": "@id"
+          }
+        }
+      },
+      "prov:Delegation": {
+        "@id": "prov:Delegation",
+        "@context": {
+          "responsible": {
+            "@id": "prov:agent",
+            "@type": "@id"
+          },
+          "delegate": {
+            "@reverse": "prov:qualifiedDelegation",
+            "@type": "@id"
+          },
+          "activity": {
+            "@id": "prov:hadActivity",
+            "@type": "@id"
+          }
+        }
+      },
+      "prov:label": {
+        "@id": "rdfs:label"
+      },
+      "prov:Association": {
+        "@id": "prov:Association",
+        "@context": {
+          "activity": {
+            "@reverse": "prov:qualifiedAssociation",
+            "@type": "@id"
+          },
+          "plan": {
+            "@id": "prov:hadPlan",
+            "@type": "@id"
+          }
+        }
+      },
+      "@version": 1.1,
+      "prov": "http://www.w3.org/ns/prov#",
+      "prov:location": {
+        "@id": "prov:atLocation",
+        "@type": "@id"
+      },
+      "prov:End": {
+        "@id": "prov:End",
+        "@context": {
+          "activity": {
+            "@reverse": "prov:qualifiedEnd",
+            "@type": "@id"
+          },
+          "trigger": {
+            "@id": "prov:entity",
+            "@type": "@id"
+          },
+          "ender": {
+            "@id": "prov:hadActivity",
+            "@type": "@id"
+          },
+          "time": {
+            "@id": "prov:atTime",
+            "@type": "xsd:dateTime"
+          }
+        }
+      },
+      "prov:type": {
+        "@id": "rdf:type",
+        "@type": "@id"
+      },
+      "prov:Generation": {
+        "@id": "prov:Generation",
+        "@context": {
+          "entity": {
+            "@reverse": "prov:qualifiedGeneration",
+            "@type": "@id"
+          },
+          "time": {
+            "@id": "prov:atTime",
+            "@type": "xsd:dateTime"
+          }
+        }
+      },
+      "prov:Communication": {
+        "@id": "prov:Communication",
+        "@context": {
+          "informed": {
+            "@reverse": "prov:qualifiedCommunication",
+            "@type": "@id"
+          },
+          "informant": {
+            "@id": "prov:activity",
+            "@type": "@id"
+          }
+        }
+      },
+      "prov:Influence": {
+        "@id": "prov:Influence",
+        "@context": {
+          "influencee": {
+            "@reverse": "prov:qualifiedInfluence",
+            "@type": "@id"
+          },
+          "influencer": {
+            "@id": "prov:influencer",
+            "@type": "@id"
+          }
+        }
+      },
+      "prov:role": {
+        "@id": "prov:hadRole",
+        "@type": "@id"
+      },
+      "prov:Derivation": {
+        "@id": "prov:Derivation",
+        "@context": {
+          "generatedEntity": {
+            "@reverse": "prov:qualifiedDerivation",
+            "@type": "@id"
+          },
+          "usedEntity": {
+            "@id": "prov:entity",
+            "@type": "@id"
+          },
+          "generation": {
+            "@id": "prov:hadGeneration",
+            "@type": "@id"
+          },
+          "activity": {
+            "@id": "prov:hadActivity",
+            "@type": "@id"
+          },
+          "usage": {
+            "@id": "prov:hadUsage",
+            "@type": "@id"
+          }
+        }
+      },
+      "prov:Start": {
+        "@id": "prov:Start",
+        "@context": {
+          "activity": {
+            "@reverse": "prov:qualifiedStart",
+            "@type": "@id"
+          },
+          "trigger": {
+            "@id": "prov:entity",
+            "@type": "@id"
+          },
+          "starter": {
+            "@id": "prov:hadActivity",
+            "@type": "@id"
+          },
+          "time": {
+            "@id": "prov:atTime",
+            "@type": "xsd:dateTime"
+          }
+        }
+      },
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "prov:Activity": {
+        "@id": "prov:Activity",
+        "@context": {
+          "startTime": {
+            "@id": "prov:startedAtTime",
+            "@type": "xsd:dateTime"
+          },
+          "endTime": {
+            "@id": "prov:endedAtTime",
+            "@type": "xsd:dateTime"
+          }
+        }
+      },
+      "entity": {
+        "@id": "prov:entity",
+        "@type": "@id"
+      },
+      "prov:QualifiedMembership": {
+        "@id": "prov:QualifiedMembership",
+        "@context": {
+          "collection": {
+            "@reverse": "prov:qualifiedMembership",
+            "@type": "@id"
+          },
+          "entity": {
+            "@id": "prov:entity",
+            "@type": "@id"
+          }
+        }
+      }
+    }
+  ],
+  "@graph": [
+    {
+      "@type": "prov:Agent",
+      "@id": "app:the_bank",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "prov:Organization",
+        "pl:DataController"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Agent",
+      "@id": "ex:machine/2c2a79264728",
+      "cs:machine_release": [
+        {
+          "@value": "3.10.0-1160.11.1.el7.x86_64"
+        }
+      ],
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "prov:SoftwareAgent"
+      ],
+      "cs:machine_version": [
+        {
+          "@value": "#1 SMP Fri Dec 18 16:34:56 UTC 2020"
+        }
+      ],
+      "cs:machine_python_version": [
+        {
+          "@value": "3.7.7"
+        }
+      ],
+      "cs:machine_system": [
+        {
+          "@value": "Linux"
+        }
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Delegation",
+      "delegate": "ex:machine/2c2a79264728",
+      "responsible": "app:the_bank",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Agent",
+      "@id": "app:applicants/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "prov:Person",
+        "pl:DataSubject",
+        "cs:Applicant"
+      ],
+      "prov:label": [
+        {
+          "@value": "Anna"
+        }
+      ],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Entity",
+      "@id": "app:applications/437",
+      "pl:created_at": [
+        {
+          "@value": "2021-02-17T22:07:03",
+          "@type": "xsd:dateTime"
+        }
+      ],
+      "cs:attr_dob": [
+        {
+          "@value": "1970-01-01",
+          "@type": "xsd:date"
+        }
+      ],
+      "prov:value": [],
+      "prov:location": [],
+      "prov:role": [],
+      "cs:attr_emp_length": [
+        {
+          "@value": "10+ years"
+        }
+      ],
+      "cs:attr_address": [
+        {
+          "@value": "Some address"
+        }
+      ],
+      "prov:type": [
+        "cs:CreditCardApplication",
+        "pl:Request",
+        "pl:SubjectData",
+        "pl:Data"
+      ],
+      "cs:attr_applicant_name": [
+        {
+          "@value": "Anna"
+        }
+      ],
+      "cs:attr_home_ownership": [
+        {
+          "@value": "MORTGAGE"
+        }
+      ],
+      "cs:attr_annual_inc": [
+        {
+          "@value": "100000",
+          "@type": "xsd:int"
+        }
+      ],
+      "prov:label": [],
+      "cs:attr_emp_title": [
+        {
+          "@value": "Technician"
+        }
+      ]
+    },
+    {
+      "@type": "prov:Attribution",
+      "entity": "app:applications/437",
+      "agent": "app:applicants/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Entity",
+      "@id": "app:applications/437/id",
+      "prov:role": [],
+      "prov:value": [],
+      "cs:attr_address": [
+        {
+          "@value": "Some address"
+        }
+      ],
+      "prov:type": [
+        "pl:SubjectData",
+        "cs:PersonIdentifier",
+        "pl:Data"
+      ],
+      "cs:attr_applicant_name": [
+        {
+          "@value": "Anna"
+        }
+      ],
+      "cs:attr_annual_inc": [
+        {
+          "@value": "100000",
+          "@type": "xsd:int"
+        }
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "app:applications/437/id",
+      "usedEntity": "app:applications/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Agent",
+      "@id": "app:CRA",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "prov:Organization",
+        "cs:CreditReferencingAgency"
+      ],
+      "prov:label": [
+        {
+          "@value": "the Credit Referencing Agency"
+        }
+      ],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Activity",
+      "@id": "ex:credit_search/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "cs:CreditReferencing"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Association",
+      "activity": "ex:credit_search/437",
+      "agent": "app:CRA",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Usage",
+      "activity": "ex:credit_search/437",
+      "entity": "app:applications/437/id",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Entity",
+      "@id": "app:credit_history/437",
+      "pl:created_at": [
+        {
+          "@value": "2021-02-15T15:13:46.618981",
+          "@type": "xsd:dateTime"
+        }
+      ],
+      "cs:attr_revol_util": [
+        {
+          "@value": "14.6",
+          "@type": "xsd:float"
+        }
+      ],
+      "cs:credit_score": [
+        {
+          "@value": "447",
+          "@type": "xsd:int"
+        }
+      ],
+      "prov:value": [],
+      "prov:location": [],
+      "cs:attr_revol_bal": [
+        {
+          "@value": "3902",
+          "@type": "xsd:int"
+        }
+      ],
+      "cs:attr_open_acc": [
+        {
+          "@value": "9",
+          "@type": "xsd:int"
+        }
+      ],
+      "cs:attr_pub_rec": [
+        {
+          "@value": "0",
+          "@type": "xsd:int"
+        }
+      ],
+      "cs:attr_pub_rec_bankruptcies": [
+        {
+          "@value": "0",
+          "@type": "xsd:int"
+        }
+      ],
+      "prov:role": [],
+      "cs:attr_mort_acc": [
+        {
+          "@value": "1",
+          "@type": "xsd:int"
+        }
+      ],
+      "prov:type": [
+        "pl:ExternalData",
+        "cs:CreditHistory",
+        "pl:Data"
+      ],
+      "prov:label": [],
+      "cs:attr_earliest_cr_line": [
+        {
+          "@value": "Feb-1983"
+        }
+      ]
+    },
+    {
+      "@type": "prov:Generation",
+      "entity": "app:credit_history/437",
+      "activity": "ex:credit_search/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "app:credit_history/437",
+      "usedEntity": "app:applications/437/id",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Attribution",
+      "entity": "app:credit_history/437",
+      "agent": "app:CRA",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Activity",
+      "@id": "ex:assess_credit_application/437",
+      "startTime": "2021-02-17T22:07:06.715Z",
+      "endTime": "2021-02-17T22:07:06.717Z",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "pl:MachineLedActivity"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Association",
+      "activity": "ex:assess_credit_application/437",
+      "agent": "ex:machine/2c2a79264728",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Usage",
+      "activity": "ex:assess_credit_application/437",
+      "entity": "app:credit_history/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Entity",
+      "@id": "ex:recommendation/437",
+      "cs:credit_worthiness": [
+        {
+          "@value": "0.254497",
+          "@type": "xsd:float"
+        }
+      ],
+      "cs:credit_worthiness_threshold": [
+        {
+          "@value": "0.64",
+          "@type": "xsd:float"
+        }
+      ],
+      "cs:credit_score_threshold": [
+        {
+          "@value": "750",
+          "@type": "xsd:int"
+        }
+      ],
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "cs:AutomatedRecommendation",
+        "pl:AutomatedRecommendation"
+      ],
+      "prov:label": [],
+      "prov:location": [],
+      "cs:recommendation": [
+        "cs:rejected"
+      ]
+    },
+    {
+      "@type": "prov:Generation",
+      "entity": "ex:recommendation/437",
+      "activity": "ex:assess_credit_application/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "ex:recommendation/437",
+      "usedEntity": "app:applications/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "ex:recommendation/437",
+      "usedEntity": "app:credit_history/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Entity",
+      "@id": "app:applications/437/decision",
+      "prov:role": [],
+      "cs:result": [
+        "cs:rejected"
+      ],
+      "prov:value": [],
+      "pl:reason": [
+        "cs:low_credit_score"
+      ],
+      "prov:type": [
+        "pl:AutomatedDecision",
+        "cs:CreditDecision",
+        "pl:Decision",
+        "pl:RejectionDecision"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "app:applications/437/decision",
+      "usedEntity": "ex:recommendation/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Activity",
+      "@id": "ex:process_application/437",
+      "startTime": "2021-02-17T22:07:06.714Z",
+      "endTime": "2021-02-17T22:07:06.718Z",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "pl:MachineLedActivity",
+        "cs:AssessingCreditApplication"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Usage",
+      "activity": "ex:process_application/437",
+      "entity": "app:applications/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Association",
+      "activity": "ex:process_application/437",
+      "agent": "app:the_bank",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Attribution",
+      "entity": "app:applications/437/decision",
+      "agent": "ex:machine/2c2a79264728",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Generation",
+      "entity": "app:applications/437/decision",
+      "activity": "ex:process_application/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "app:applications/437/decision",
+      "usedEntity": "app:applications/437",
+      "activity": "ex:process_application/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Agent",
+      "@id": "app:provider/694",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "cs:DataProvider"
+      ],
+      "prov:label": [
+        {
+          "@value": "Lender 1"
+        }
+      ],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Entity",
+      "@id": "app:records/70551",
+      "pl:created_at": [
+        {
+          "@value": "2020-09-01T01:00:00",
+          "@type": "xsd:dateTime"
+        }
+      ],
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "pl:ExternalData",
+        "cs:LatePayment",
+        "cs:CreditRecord",
+        "pl:Data"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Attribution",
+      "entity": "app:records/70551",
+      "agent": "app:provider/694",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "app:credit_history/437",
+      "usedEntity": "app:records/70551",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "cs:NegativeInfluence"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Entity",
+      "@id": "app:records/70552",
+      "pl:created_at": [
+        {
+          "@value": "2020-10-01T01:00:00",
+          "@type": "xsd:dateTime"
+        }
+      ],
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "pl:ExternalData",
+        "cs:LatePayment",
+        "cs:CreditRecord",
+        "pl:Data"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Attribution",
+      "entity": "app:records/70552",
+      "agent": "app:provider/694",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "app:credit_history/437",
+      "usedEntity": "app:records/70552",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "cs:NegativeInfluence"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Agent",
+      "@id": "app:provider/685",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "cs:DataProvider"
+      ],
+      "prov:label": [
+        {
+          "@value": "Lender 2"
+        }
+      ],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Entity",
+      "@id": "app:records/70553",
+      "pl:created_at": [
+        {
+          "@value": "2020-07-01T01:00:00",
+          "@type": "xsd:dateTime"
+        }
+      ],
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "pl:ExternalData",
+        "cs:CreditRecord",
+        "cs:MissedPayment",
+        "pl:Data"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Attribution",
+      "entity": "app:records/70553",
+      "agent": "app:provider/685",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "app:credit_history/437",
+      "usedEntity": "app:records/70553",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "cs:NegativeInfluence"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Agent",
+      "@id": "app:provider/11",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "cs:DataProvider"
+      ],
+      "prov:label": [
+        {
+          "@value": "The Electoral Commission"
+        }
+      ],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Entity",
+      "@id": "app:records/70554",
+      "pl:created_at": [
+        {
+          "@value": "2021-01-03T02:00:00",
+          "@type": "xsd:dateTime"
+        }
+      ],
+      "cs:attr_dob": [
+        {
+          "@value": "1970-01-01",
+          "@type": "xsd:date"
+        }
+      ],
+      "cs:on_electoral_register_since": [
+        {
+          "@value": "2017-09-25",
+          "@type": "xsd:date"
+        }
+      ],
+      "prov:role": [],
+      "prov:value": [],
+      "cs:attr_address": [
+        {
+          "@value": "Some address"
+        }
+      ],
+      "prov:type": [
+        "pl:ExternalData",
+        "cs:IdentityRecord",
+        "cs:ElectoralRegisterEntry",
+        "pl:Data"
+      ],
+      "cs:attr_applicant_name": [
+        {
+          "@value": "Anna"
+        }
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Attribution",
+      "entity": "app:records/70554",
+      "agent": "app:provider/11",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "app:credit_history/437",
+      "usedEntity": "app:records/70554",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "cs:IdentityMatching"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Entity",
+      "@id": "app:applications/436",
+      "pl:created_at": [
+        {
+          "@value": "2019-02-17T22:07:04",
+          "@type": "xsd:dateTime"
+        }
+      ],
+      "cs:attr_dob": [
+        {
+          "@value": "1970-01-01",
+          "@type": "xsd:date"
+        }
+      ],
+      "prov:value": [],
+      "prov:location": [],
+      "prov:role": [],
+      "cs:attr_emp_length": [
+        {
+          "@value": "8 years"
+        }
+      ],
+      "cs:attr_address": [
+        {
+          "@value": "Some address"
+        }
+      ],
+      "prov:type": [
+        "cs:CreditCardApplication",
+        "pl:Request",
+        "pl:SubjectData",
+        "pl:Data"
+      ],
+      "cs:attr_applicant_name": [
+        {
+          "@value": "Anna"
+        }
+      ],
+      "cs:attr_home_ownership": [
+        {
+          "@value": "MORTGAGE"
+        }
+      ],
+      "cs:attr_annual_inc": [
+        {
+          "@value": "90000",
+          "@type": "xsd:int"
+        }
+      ],
+      "prov:label": [],
+      "cs:attr_emp_title": [
+        {
+          "@value": "Technician"
+        }
+      ]
+    },
+    {
+      "@type": "prov:Attribution",
+      "entity": "app:applications/436",
+      "agent": "app:applicants/437",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "app:applications/436/decision",
+      "usedEntity": "app:applications/436",
+      "activity": "ex:process_application/436",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Activity",
+      "@id": "ex:process_application/436",
+      "startTime": "2019-02-17T22:07:06.714Z",
+      "endTime": "2019-02-17T22:07:06.718Z",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [
+        "pl:MachineLedActivity",
+        "cs:AssessingCreditApplication"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Usage",
+      "activity": "ex:process_application/436",
+      "entity": "app:applications/436",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Association",
+      "activity": "ex:process_application/436",
+      "agent": "app:the_bank",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Generation",
+      "entity": "app:applications/436/decision",
+      "activity": "ex:process_application/436",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Entity",
+      "@id": "app:applications/436/decision",
+      "prov:role": [],
+      "cs:result": [
+        "cs:rejected"
+      ],
+      "prov:value": [],
+      "pl:reason": [
+        "cs:low_affordability"
+      ],
+      "prov:type": [
+        "pl:AutomatedDecision",
+        "cs:CreditDecision",
+        "pl:Decision"
+      ],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Usage",
+      "activity": "ex:assess_credit_application/437",
+      "entity": "app:applications/436/decision",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    },
+    {
+      "@type": "prov:Derivation",
+      "generatedEntity": "ex:recommendation/437",
+      "usedEntity": "app:applications/436/decision",
+      "prov:role": [],
+      "prov:value": [],
+      "prov:type": [],
+      "prov:label": [],
+      "prov:location": []
+    }
+  ]
+}

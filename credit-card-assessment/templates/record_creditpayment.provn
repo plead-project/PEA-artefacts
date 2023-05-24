@@ -1,0 +1,25 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix cs <http://openprovenance.org/ns/creditscoring#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    agent(var:provider, [prov:type='cs:DataProvider', prov:type='var:provider_type', tmpl:label='var:provider_label'])
+    entity(var:record, [
+      prov:type='pl:Data', prov:type='pl:ExternalData',
+      prov:type='cs:CreditRecord',
+      prov:type='var:record_type',
+      cs:attr_account='var:account',
+      cs:attr_month='var:month',
+      cs:attr_payment_amount='var:payment',
+      cs:attr_credit_limit='var:credit_limit',
+      cs:attr_balance='var:balance',
+      pl:created_at='var:timestamp'
+    ])
+    wasAttributedTo(var:record, var:provider)
+  endBundle
+
+endDocument

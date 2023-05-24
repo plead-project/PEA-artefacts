@@ -1,0 +1,38 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix cs <http://openprovenance.org/ns/creditscoring#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    agent(var:credit_provider)
+    agent(var:officer, [
+      prov:type='prov:Person',
+      prov:type='prov:officer_type',
+      tmpl:label='var:officer_label'
+    ])
+    entity(var:credit_assessment_policy)
+    entity(var:review_input)
+    entity(var:machine_recommendation)
+    activity(vargen:reviewing_credit_recommendation, -, -, [
+      prov:type='pl:HumanLedActivity',
+      prov:type='cs:ReviewingMachineCreditRecommendation',
+      prov:type='var:review_type',
+      tmpl:startTime='var:startTime',
+      tmpl:endTime='var:endTime'
+    ])
+    wasAssociatedWith(vargen:reviewing_credit_recommendation, var:officer, var:credit_assessment_policy)
+    used(vargen:reviewing_credit_recommendation, var:review_input, -)
+    used(vargen:reviewing_credit_recommendation, var:machine_recommendation, -)
+    actedOnBehalfOf(var:officer, var:credit_provider, vargen:reviewing_credit_recommendation)
+
+    entity(var:decision)
+    wasAttributedTo(var:decision, var:officer)
+    wasGeneratedBy(var:decision, vargen:reviewing_credit_recommendation, -)
+    wasDerivedFrom(var:decision, var:machine_recommendation, vargen:reviewing_credit_recommendation, -, -)
+    wasDerivedFrom(var:decision, var:review_input, vargen:reviewing_credit_recommendation, -, -)
+  endBundle
+
+endDocument

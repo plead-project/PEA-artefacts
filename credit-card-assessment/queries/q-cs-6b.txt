@@ -1,0 +1,7 @@
+prefix cs <http://openprovenance.org/ns/creditscoring#>
+prefix pl <http://openprovenance.org/ns/plead#>
+prefix app <https://explain.openprovenance.org/creditscoring/>
+
+select * from recommendation a prov:Entity
+
+where recommendation[prov:type] >= 'pl:AutomatedRecommendation'

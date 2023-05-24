@@ -1,0 +1,15 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix cs <http://openprovenance.org/ns/creditscoring#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    entity(var:machine_recommendation)
+    entity(var:decision)
+    wasDerivedFrom(var:decision, var:machine_recommendation)
+  endBundle
+
+endDocument

@@ -1,0 +1,42 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix cs <http://openprovenance.org/ns/creditscoring#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    agent(var:credit_provider)
+    agent(var:machine, [
+      prov:type='prov:SoftwareAgent',
+      tmpl:label='var:machine_label'
+    ])
+    entity(var:input)
+    entity(var:credit_assessment_model)
+    activity(vargen:assessing_application, -, -, [
+      prov:type='cs:AutomatedAssessingCreditApplication',
+      prov:type='pl:MachineLedActivity',
+      tmpl:startTime='var:startTime',
+      tmpl:endTime='var:endTime'
+    ])
+    wasAssociatedWith(vargen:assessing_application, var:machine, var:credit_assessment_model)
+    used(vargen:assessing_application, var:input, -)
+    actedOnBehalfOf(var:machine, var:credit_provider, vargen:assessing_application)
+
+    entity(var:machine_recommendation, [
+      prov:type='pl:AutomatedRecommendation',
+      prov:type='cs:AutomatedRecommendation',
+      cs:credit_worthiness='var:credit_worthiness',
+      cs:credit_score_threshold='var:credit_score_threshold',
+      cs:credit_worthiness_threshold='var:credit_worthiness_threshold',
+      cs:recommendation='var:decision_result',
+      pl:reason='var:decision_reason',
+      pl:created_at='var:timestamp'
+    ])
+    wasAttributedTo(var:machine_recommendation, var:machine)
+    wasGeneratedBy(var:machine_recommendation, vargen:assessing_application, -)
+    wasDerivedFrom(var:machine_recommendation, var:input, vargen:assessing_application, -, -)
+  endBundle
+
+endDocument

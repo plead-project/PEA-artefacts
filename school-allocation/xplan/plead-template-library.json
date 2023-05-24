@@ -1,0 +1,27 @@
+{
+  "name": "plead",
+  "templates": [
+    "plead.sa-1a.json",
+    "plead.sa-1b.json",
+    "plead.sa-1c.json",
+    "plead.sa-1d.json",
+    "plead.sa-1e.json",
+    "plead.sa-1f.json",
+    "plead.sa-2a.json",
+    "plead.sa-2b.json",
+    "plead.sa-2c.json",
+    "plead.sa-4a.json",
+    "plead.sa-4b.json"
+  ],
+  "dictionaries": [
+    "plead-dictionary.json"
+  ],
+  "profiles": [
+    "plead-profile1.json"
+  ],
+  "active_profiles": [
+    [ "ln:guardian-person2", "ln:guardian-noun", "ln:guardian-person3-f", "ln:guardian-person3-m"],
+    ["ln:school", "ln:school-pronoun-1","ln:school-pronoun-1"],
+    [ "ln:child-person2","ln:child-noun","ln:child-person3-f","ln:child-person3-m"]
+  ]
+}

@@ -1,0 +1,27 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix cs <http://openprovenance.org/ns/creditscoring#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    agent(var:cra, [prov:type='pl:DataProvider', prov:type='var:provider_type', tmpl:label='var:provider_label'])
+    entity(var:subject_identifier)
+    activity(vargen:credit_search, -, -, [prov:type='cs:SearchingCreditHistory', tmpl:startTime='var:startTime', tmpl:endTime='var:endTime'])
+    wasAssociatedWith(vargen:credit_search, var:cra, -)
+    used(vargen:credit_search, var:subject_identifier, -)
+
+    entity(var:credit_report, [
+      prov:type='pl:Data', prov:type='pl:ExternalData',
+      prov:type='var:report_type',
+      cs:credit_score='var:credit_score',
+      pl:created_at='var:timestamp'
+    ])
+    wasGeneratedBy(var:credit_report, vargen:credit_search, -)
+    wasAttributedTo(var:credit_report, var:cra)
+    wasDerivedFrom(var:credit_report, var:subject_identifier)
+  endBundle
+
+endDocument

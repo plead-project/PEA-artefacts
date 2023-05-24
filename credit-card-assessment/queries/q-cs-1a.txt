@@ -1,0 +1,27 @@
+prefix cs <http://openprovenance.org/ns/creditscoring#>
+prefix pl <http://openprovenance.org/ns/plead#>
+prefix app <https://explain.openprovenance.org/creditscoring/>
+
+select * from decision a prov:Entity
+
+from gen a prov:WasGeneratedBy
+ join decision.id = gen.entity
+
+from processing a prov:Activity
+ join gen.activity = processing.id
+
+from usd a prov:Used
+ join processing.id = usd.activity
+
+from application a prov:Entity
+ join usd.entity = application.id
+
+from wat1 a prov:WasAttributedTo
+ join application.id = wat1.entity
+
+from applicant a prov:Agent
+ join wat1.agent = applicant.id
+
+where decision[prov:type] >= 'pl:RejectionDecision'
+and application[prov:type] >= 'pl:Request'
+and applicant[prov:type] >= 'pl:DataSubject'

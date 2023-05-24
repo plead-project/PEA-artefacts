@@ -1,0 +1,49 @@
+prefix pl <http://openprovenance.org/ns/plead#>
+prefix sa <http://openprovenance.org/ns/school-admission#>
+prefix app <https://explain.openprovenance.org/school-admission/>
+
+select * from offer a prov:Entity
+
+from der1 a prov:WasDerivedFrom
+ join offer.id = der1.generatedEntity
+
+from waiting_place a prov:Entity
+ join der1.usedEntity = waiting_place.id
+
+from der2 a prov:WasDerivedFrom
+ join waiting_place.id = der2.generatedEntity
+
+from rank_position a prov:Entity
+ join der2.usedEntity = rank_position.id
+
+from der3 a prov:WasDerivedFrom
+ join rank_position.id = der3.generatedEntity
+
+from preference a prov:Entity
+ join der3.usedEntity = preference.id
+
+from attr1 a prov:WasAttributedTo
+ join offer.id = attr1.entity
+
+from officer a prov:Agent
+ join attr1.agent = officer.id
+
+from del a prov:ActedOnBehalfOf
+ join officer.id = del.delegate
+
+from alt_school a prov:Agent
+ join del.responsible = alt_school.id
+
+from attr2 a prov:WasAttributedTo
+ join waiting_place.id = attr2.entity
+
+from school a prov:Agent
+ join attr2.agent = school.id
+
+where offer[prov:type]         >= 'sa:AlternativeSchoolPlaceOffer'
+ and  waiting_place[prov:type] >= 'sa:WaitingListPlace'
+ and  rank_position[prov:type] >= 'sa:SchoolPlaceRankedPosition'
+ and  preference[prov:type]    >= 'sa:SchoolPlacePreference'
+ and  alt_school[prov:type]    >= 'sa:School'
+ and  school[prov:type]        >= 'sa:School'
+ and  preference[sa:preference_order] = 1

@@ -1,0 +1,110 @@
+{
+  "ln:school": {
+    "ln:school-noun": {
+      "features": {
+        "pronominal": "false",
+        "possessive": "false"
+      }
+    },
+    "ln:school-pronoun-1": {
+      "features": {
+        "pronominal": "true",
+        "possessive": "false",
+        "person": "first",
+        "number": "plural"
+      }
+    }
+  },
+  "ln:school-possessive": {
+    "ln:school-noun": {
+      "features": {
+        "pronominal": "false",
+        "possessive": "true"
+      }
+    },
+    "ln:school-pronoun-1": {
+      "features": {
+        "pronominal": "true",
+        "possessive": "true",
+        "person": "first",
+        "number": "plural"
+      }
+    }
+  },
+  "ln:guardian-possessive": {
+    "ln:guardian-person1": {
+      "features": {
+        "pronominal": "true",
+        "possessive": "true",
+        "person": "first"
+      }
+    },
+    "ln:guardian-person2": {
+      "features": {
+        "pronominal": "true",
+        "possessive": "true",
+        "person": "second"
+      }
+    },
+    "ln:guardian-noun": {
+      "features": {
+        "pronominal": "false",
+        "possessive": "true"
+      }
+    },
+    "ln:guardian-person3-f": {
+      "features": {
+        "pronominal": "true",
+        "possessive": "true",
+        "gender": "feminine",
+        "person": "third"
+      }
+    },
+    "ln:guardian-person3-m": {
+      "features": {
+        "pronominal": "true",
+        "gender": "masculine",
+        "possessive": "true",
+        "person": "third"
+      }
+    }
+  },
+  "ln:child-possessive": {
+    "ln:child-person1": {
+      "features": {
+        "pronominal": "true",
+        "possessive": "true",
+        "person": "first"
+      }
+    },
+    "ln:child-person2": {
+      "features": {
+        "pronominal": "true",
+        "possessive": "true",
+        "person": "second"
+      }
+    },
+    "ln:child-noun": {
+      "features": {
+        "pronominal": "false",
+        "possessive": "true"
+      }
+    },
+    "ln:child-person3-f": {
+      "features": {
+        "pronominal": "true",
+        "possessive": "true",
+        "gender": "feminine",
+        "person": "third"
+      }
+    },
+    "ln:child-person3-m": {
+      "features": {
+        "pronominal": "true",
+        "gender": "masculine",
+        "possessive": "true",
+        "person": "third"
+      }
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "select": {
+    "decision": {
+      "@type": "prov:Entity"
+    },
+    "request": {
+      "@type": "prov:Entity"
+    },
+    "officer": {
+      "@type": "prov:Agent"
+    },
+    "reviewing": {
+      "@type": "prov:Activity"
+    },
+    "assoc": {
+      "@type": "prov:WasAssociatedWith"
+    },
+    "der1": {
+      "@type": "prov:WasDerivedFrom"
+    }
+  },
+  "query": [
+    "prefix pl <http://openprovenance.org/ns/plead#>",
+    "prefix sa <http://openprovenance.org/ns/school-admission#>",
+    "prefix app <https://explain.openprovenance.org/school-admission/>",
+    "select * from offer a prov:Entity",
+    "from der1 a prov:WasDerivedFrom",
+    " join offer.id = der1.generatedEntity",
+    "from rank_position a prov:Entity",
+    " join der1.usedEntity = rank_position.id",
+    "from der2 a prov:WasDerivedFrom",
+    " join rank_position.id = der2.generatedEntity",
+    "from preference a prov:Entity",
+    " join der2.usedEntity = preference.id",
+    "from der3 a prov:WasDerivedFrom",
+    " join offer.id = der3.generatedEntity",
+    "from policy a prov:Entity",
+    "join der3.usedEntity = policy.id",
+    "from attr1 a prov:WasAttributedTo",
+    " join offer.id = attr1.entity",
+    "from school a prov:Agent",
+    " join attr1.agent = school.id",
+    "where offer[prov:type]         >= 'sa:SchoolPlaceOffer'",
+    " and  rank_position[prov:type] >= 'sa:SchoolPlaceRankedPosition'",
+    " and  preference[prov:type]    >= 'sa:SchoolPlacePreference'",
+    " and  policy[prov:type]        >= 'sa:AdmissionPolicy'",
+    " and  school[prov:type]        >= 'sa:School'"
+  ],
+  "sentence": {
+    "type": "paragraph",
+    "items": [
+      {
+        "type": "clause",
+        "verb": "allocate",
+        "object": {
+          "type": "noun_phrase",
+          "determiner": "a",
+          "head": "place"
+        },
+        "post-modifiers": [
+          {
+            "type": "preposition_phrase",
+            "preposition": "for",
+            "noun": {
+              "type": "noun_phrase",
+              "head": {
+                "type": "@funcall",
+                "@object": "offer",
+                "@function": "identity",
+                "@property": "sa:child_name"
+              },
+              "features": {
+                "type": "features",
+                "head_markup_element": "span",
+                "head_markup_attributes": {
+                  "type": "@funcall",
+                  "@object": "offer",
+                  "@function": "markup-for-id",
+                  "@field": "id",
+                  "@arg1": "provelement"
+                }
+              }
+            }
+          },
+          {
+            "type": "preposition_phrase",
+            "preposition": "at",
+            "noun": {
+              "type": "noun_phrase",
+              "head": {
+                "type": "@funcall",
+                "@object": "school",
+                "@function": "string",
+                "@property": "prov:label"
+              },
+              "features": {
+                "type": "features",
+                "head_markup_element": "span",
+                "head_markup_attributes": {
+                  "type": "@funcall",
+                  "@object": "school",
+                  "@function": "markup-for-id",
+                  "@field": "id",
+                  "@arg1": "provelement"
+                }
+              },
+              "post-modifiers": [
+                {
+                  "type": "noun_phrase",
+                  "head": "school",
+                  "pre-modifiers": [
+                    {
+                      "type": "adjective_phrase",
+                      "head": {
+                        "type": "@funcall",
+                        "@object": "preference",
+                        "@function": "ordinal",
+                        "@property": "sa:preference_order"
+                      },
+                      "features": {
+                        "type": "features",
+                        "head_markup_element": "span",
+                        "head_markup_attributes": {
+                          "type": "@funcall",
+                          "@object": "preference",
+                          "@function": "markup-for-id",
+                          "@field": "id",
+                          "@arg1": "provelement"
+                        }
+                      }
+                    },
+                    {
+                      "type": "adjective_phrase",
+                      "head": "preferred"
+
+                    }
+                  ],
+                  "specifier": "##guardian-possessive"
+                }
+              ]
+            }
+          },
+          {
+            "type": "verb_phrase",
+            "head": "starting",
+            "features": {
+              "type": "features",
+              "tense": "future",
+              "form": "presentParticiple"
+            },
+            "post-modifiers": [
+              {
+                "type": "noun_phrase",
+                "head": "September"
+              }
+            ]
+          }
+        ],
+        "features": {
+          "type": "features",
+          "tense": "present",
+          "passive": "true",
+          "perfect": "true"
+        }
+      }
+    ],
+    "properties": {}
+  },
+  "context": {
+    "ex": "http://example.org/#",
+    "app": "https://explain.openprovenance.org/creditscoring/",
+    "pl": "http://openprovenance.org/ns/plead#",
+    "sa": "http://openprovenance.org/ns/school-admission#"
+  }
+}

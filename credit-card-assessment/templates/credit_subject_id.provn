@@ -1,0 +1,22 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix cs <http://openprovenance.org/ns/creditscoring#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    entity(var:application)
+    entity(var:subject_identifier, [
+      prov:type='pl:Data', prov:type='pl:SubjectData',
+      prov:type='cs:PersonIdentifier',
+      cs:attr_address='var:address',
+      cs:attr_prev_address='var:prev_address',
+      cs:attr_dob='var:dob',
+      cs:attr_applicant_name='var:applicant_name'
+    ])
+    wasDerivedFrom(var:subject_identifier, var:application)
+  endBundle
+
+endDocument

@@ -1,0 +1,190 @@
+{
+  "select": {
+    "decision": {
+      "@type": "prov:Entity"
+    },
+    "request": {
+      "@type": "prov:Entity"
+    },
+    "officer": {
+      "@type": "prov:Agent"
+    },
+    "reviewing": {
+      "@type": "prov:Activity"
+    },
+    "assoc": {
+      "@type": "prov:WasAssociatedWith"
+    },
+    "der1": {
+      "@type": "prov:WasDerivedFrom"
+    }
+  },
+  "query": [
+    "prefix pl <http://openprovenance.org/ns/plead#>",
+    "prefix sa <http://openprovenance.org/ns/school-admission#>",
+    "prefix app <https://explain.openprovenance.org/school-admission/>",
+    "select * from offer a prov:Entity",
+    "from der1 a prov:WasDerivedFrom",
+    " join offer.id = der1.generatedEntity",
+    "from waiting_place a prov:Entity",
+    " join der1.usedEntity = waiting_place.id",
+    "from der2 a prov:WasDerivedFrom",
+    " join waiting_place.id = der2.generatedEntity",
+    "from rank_position a prov:Entity",
+    " join der2.usedEntity = rank_position.id",
+    "from der3 a prov:WasDerivedFrom",
+    " join rank_position.id = der3.generatedEntity",
+    "from preference a prov:Entity",
+    " join der3.usedEntity = preference.id",
+    "from attr1 a prov:WasAttributedTo",
+    " join offer.id = attr1.entity",
+    "from officer a prov:Agent",
+    " join attr1.agent = officer.id",
+    "from del a prov:ActedOnBehalfOf",
+    " join officer.id = del.delegate",
+    "from alt_school a prov:Agent",
+    " join del.responsible = alt_school.id",
+    "from attr2 a prov:WasAttributedTo",
+    " join waiting_place.id = attr2.entity",
+    "from school a prov:Agent",
+    " join attr2.agent = school.id",
+    "where offer[prov:type]         >= 'sa:AlternativeSchoolPlaceOffer'",
+    " and  waiting_place[prov:type] >= 'sa:WaitingListPlace'",
+    " and  rank_position[prov:type] >= 'sa:SchoolPlaceRankedPosition'",
+    " and  preference[prov:type]    >= 'sa:SchoolPlacePreference'",
+    " and  alt_school[prov:type]    >= 'sa:School'",
+    " and  school[prov:type]        >= 'sa:School'",
+    " and  preference[sa:preference_order] = 1"
+  ],
+  "sentence": {
+    "type": "paragraph",
+    "items": [
+      {
+        "type": "clause",
+        "subject": "you",
+        "verb": {
+          "type": "verb_phrase",
+          "head": "accept",
+          "pre-modifiers": [
+            {
+              "type": "adjective_phrase",
+              "head": "can"
+            }
+          ]
+        },
+        "object": {
+          "type": "clause",
+          "verb": {
+            "type": "verb_phrase",
+            "head": "offer",
+            "post-modifiers": [
+              {
+                "type": "preposition_phrase",
+                "preposition": "to",
+                "noun": {
+                  "type": "noun_phrase",
+                  "head": "place",
+                  "pre-modifiers": [
+                    {
+                      "type": "noun_phrase",
+                      "head": "secure"
+                    }
+                  ],
+                  "post-modifiers": [
+                    {
+                      "type": "preposition_phrase",
+                      "preposition": "in",
+                      "noun": "September"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "object": {
+            "type": "noun_phrase",
+            "head": "you"
+          },
+          "indirect_object": {
+            "type": "clause",
+            "subject": {
+              "type": "noun_phrase",
+              "determiner": "a",
+              "head": "place",
+              "post-modifiers": [
+                {
+                  "type": "preposition_phrase",
+                  "preposition": "in",
+                  "noun": {
+                    "type": "noun_phrase",
+                    "head": "preference",
+                    "pre-modifiers": [
+                      {
+                        "type": "adjective_phrase",
+                        "head": "first"
+                      }
+                    ],
+                    "specifier": "##guardian-possessive"
+                  }
+                }
+              ]
+            },
+            "verb": "does not become",
+            "object": {
+              "type": "noun_phrase",
+              "head": "available"
+            },
+            "complementiser": "if"
+          },
+          "features": {
+            "type": "features",
+            "passive": "true",
+            "form": "pastParticiple"
+          }
+        },
+        "indirect_object": {
+          "type": "noun_phrase",
+          "head": "the school place",
+          "post-modifiers": [
+            {
+              "type": "preposition_phrase",
+              "preposition": "in",
+              "noun": {
+                      "type": "noun_phrase",
+                      "head": {
+                          "type": "@funcall",
+                          "@object": "alt_school",
+                          "@property": "prov:label",
+                          "@function": "identity"
+                        },
+                        "features": {
+                          "head_markup_element": "span",
+                          "head_markup_attributes": {
+                            "type": "@funcall",
+                            "@object": "alt_school",
+                            "@function": "markup-for-id",
+                            "@field": "id",
+                            "@arg1": "provelement"
+                          }
+                        }
+                    }
+            }
+          ]
+        },
+        "front-modifiers": [
+          {
+            "type": "adjective_phrase",
+            "head": "In the meantime"
+          }
+        ]
+      }
+    ],
+    "properties": {}
+  },
+  "context": {
+    "ex": "http://example.org/#",
+    "app": "https://explain.openprovenance.org/creditscoring/",
+    "pl": "http://openprovenance.org/ns/plead#",
+    "sa": "http://openprovenance.org/ns/school-admission#"
+  }
+}

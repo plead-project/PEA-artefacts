@@ -1,0 +1,23 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix sa <http://openprovenance.org/ns/school-admission#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    entity(var:preference)
+    entity(var:category_list)
+    entity(var:rank_position, [
+      prov:type='sa:SchoolPlaceRankedPosition',
+      sa:category='var:category',
+      sa:category_order='var:category_order',
+      sa:category_text='var:category_text',
+      sa:rank='var:rank'
+    ])
+    wasDerivedFrom(var:rank_position, var:category_list)
+    wasDerivedFrom(var:rank_position, var:preference)
+  endBundle
+
+endDocument

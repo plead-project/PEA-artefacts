@@ -1,0 +1,169 @@
+{
+  "select": {
+    "decision": {
+      "@type": "prov:Entity"
+    },
+    "request": {
+      "@type": "prov:Entity"
+    },
+    "officer": {
+      "@type": "prov:Agent"
+    },
+    "reviewing": {
+      "@type": "prov:Activity"
+    },
+    "assoc": {
+      "@type": "prov:WasAssociatedWith"
+    },
+    "der1": {
+      "@type": "prov:WasDerivedFrom"
+    }
+  },
+  "query": [
+    " prefix pl <http://openprovenance.org/ns/plead#>",
+    "prefix sa <http://openprovenance.org/ns/school-admission#>",
+    "prefix app <https://explain.openprovenance.org/school-admission/>",
+    "select * from waiting_place a prov:Entity",
+    "from der1 a prov:WasDerivedFrom",
+    "join waiting_place.id = der1.generatedEntity",
+    "from rank_position a prov:Entity",
+    "join der1.usedEntity = rank_position.id",
+    "from der2 a prov:WasDerivedFrom",
+    "join rank_position.id = der2.generatedEntity",
+    "from preference a prov:Entity",
+    "join der2.usedEntity = preference.id",
+    "from der3 a prov:WasDerivedFrom",
+    "join waiting_place.id = der3.generatedEntity",
+    "from policy a prov:Entity",
+    "join der3.usedEntity = policy.id",
+    "from der4 a prov:WasDerivedFrom",
+    "join policy.id = der4.usedEntity",
+    "from category a prov:Entity",
+    "join der4.generatedEntity = category.id",
+    "from attr1 a prov:WasAttributedTo",
+    "join waiting_place.id = attr1.entity",
+    "from school a prov:Agent",
+    "join attr1.agent = school.id",
+    "where waiting_place[prov:type] >= 'sa:WaitingListPlace'",
+    "and  rank_position[prov:type] >= 'sa:SchoolPlaceRankedPosition'",
+    "and  preference[prov:type]    >= 'sa:SchoolPlacePreference'",
+    "and  policy[prov:type]        >= 'sa:AdmissionPolicy'",
+    "and  category[prov:type]      >= 'sa:ApplicationCategoryList'",
+    "and  school[prov:type]        >= 'sa:School'",
+    "and  preference[sa:preference_order] = 1",
+    "group by school, waiting_place aggregate category with Seq order by category[sa:category_order]"
+  ],
+  "sentence": {
+    "type": "paragraph",
+    "items": [
+      {
+        "type": "noun_phrase",
+        "head": "applicants",
+        "features": {
+          "type": "features",
+          "number": "plural"
+        },
+        "pre-modifiers": [
+          {
+            "type": "adjective_phrase",
+            "head": "too many"
+          }
+        ],
+        "post-modifiers": [
+          {
+            "type": "coordinated_phrase",
+            "conjunction": "and",
+            "coordinates": [
+              {
+                "type": "verb_phrase",
+                "head": "applied",
+                "features": {
+                  "type": "features",
+                  "form": "pastParticiple"
+                },
+                "post-modifiers": [
+                  {
+                    "type": "preposition_phrase",
+                    "preposition": "for",
+                    "noun": "place"
+                  },
+                  {
+                    "type": "preposition_phrase",
+                    "preposition": "in",
+                    "noun": {
+                      "type": "noun_phrase",
+                      "head": {
+                        "type": "@funcall",
+                        "@object": "school",
+                        "@function": "identity",
+                        "@property": "prov:label"
+                      },
+                      "features": {
+                        "type": "features",
+                        "head_markup_element": "span",
+                        "head_markup_attributes": {
+                          "type": "@funcall",
+                          "@object": "school",
+                          "@function": "markup-for-id",
+                          "@field": "id",
+                          "@arg1": "provelement"
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "clause",
+                "subject": {
+                  "type": "noun_phrase",
+                  "head": "allocations",
+                  "features": {
+                    "type": "features",
+                    "number": "plural"
+                  }
+                },
+                "verb": {
+                  "type": "verb_phrase",
+                  "head": "had to be made",
+                  "features": {
+                    "type": "features",
+                    "form": "pastParticiple"
+                  },
+                  "post-modifiers": [
+                    {
+                      "type": "preposition_phrase",
+                      "preposition": "according to",
+                      "noun": {
+                        "type": "noun_phrase",
+                        "head": "admission",
+                        "post-modifiers": [
+                          {
+                            "type": "noun_phrase",
+                            "head": "guideline",
+                            "features": {
+                              "type": "features",
+                              "number": "plural"
+                            }
+                          }
+                        ],
+                        "specifier": "##school-possessive"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "properties": {}
+  },
+  "context": {
+    "ex": "http://example.org/#",
+    "app": "https://explain.openprovenance.org/creditscoring/",
+    "pl": "http://openprovenance.org/ns/plead#",
+    "sa": "http://openprovenance.org/ns/school-admission#"
+  }
+}

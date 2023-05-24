@@ -1,0 +1,36 @@
+document
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix vargen <http://openprovenance.org/vargen#>
+
+  bundle vargen:b
+    prefix cs <http://openprovenance.org/ns/creditscoring#>
+    prefix pl <http://openprovenance.org/ns/plead#>
+
+    agent(var:applicant, [
+      prov:type='prov:Person',
+      prov:type='cs:Applicant',
+      prov:type='pl:DataSubject',
+      tmpl:label='var:applicant_name'
+    ])
+    entity(var:application, [
+      prov:type='pl:Data',
+      prov:type='pl:SubjectData',
+      prov:type='pl:Request',
+      prov:type='cs:CreditCardApplication',
+      cs:attr_address='var:address',
+      cs:attr_prev_address='var:prev_address',
+      cs:attr_dob='var:dob',
+      cs:attr_applicant_name='var:applicant_name',
+      cs:attr_emp_title='var:emp_title',
+      cs:attr_emp_length='var:emp_length',
+      cs:attr_home_ownership='var:home_ownership',
+      cs:attr_annual_income='var:annual_income',
+      cs:attr_email_address='var:email_address',
+      cs:attr_phone_number='var:phone_number',
+      pl:created_at='var:timestamp'
+    ])
+    wasAttributedTo(var:application, var:applicant)
+  endBundle
+
+endDocument

@@ -1,0 +1,101 @@
+{
+  "help": "https://github.com/simplenlg/simplenlg/blob/master/src/test/java/simplenlg/syntax/english/NounPhraseTest.java",
+  "snippets": {
+    "##school": {
+      "type": "noun_phrase",
+      "head": "School",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:school"
+      }
+    },
+    "##theschool": {
+      "type": "noun_phrase",
+      "determiner": "the",
+      "head": "school"
+    },
+    "##school-full": {
+      "type": "noun_phrase",
+      "head": "School",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:school"
+      }
+    },
+    "##school-possessive": {
+      "type": "noun_phrase",
+      "determiner": "the",
+      "head": "school",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:school-possessive"
+      }
+    },
+    "##guardian": {
+      "type": "noun_phrase",
+      "head": "Guardian",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:guardian"
+      }
+    },
+    "##guardian-full": {
+      "type": "noun_phrase",
+      "head": "Guardian",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:guardian"
+      }
+    },
+    "##guardian-possessive": {
+      "type": "noun_phrase",
+      "determiner": "the",
+      "head": "guardian",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:guardian-possessive"
+      }
+    },
+    "##child": {
+      "type": "noun_phrase",
+      "head": "Child",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:child"
+      }
+    },
+    "##child-full": {
+      "type": "noun_phrase",
+      "head": "Guardian",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:child"
+      }
+    },
+    "##child-possessive": {
+      "type": "noun_phrase",
+      "determiner": "the",
+      "head": "child",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:child-possessive"
+      }
+    }
+  },
+  "dictionary": {
+  },
+  "context": {
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "pl": "http://openprovenance.org/ns/plead#",
+    "sa": "https://plead-project.org/ns/school-admission#"
+  }
+}

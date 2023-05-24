@@ -1,0 +1,154 @@
+
+{
+  "help": "https://github.com/simplenlg/simplenlg/blob/master/src/test/java/simplenlg/syntax/english/NounPhraseTest.java",
+
+  "snippets": {
+    "##datacontroller": {
+      "type": "noun_phrase",
+      "head": "data controller",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:datacontroller"
+      }
+    },
+    "##datacontroller-possessive": {
+      "type": "noun_phrase",
+      "head": "data controller",
+      "determiner": "the",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:datacontroller-possessive"
+      }
+    },
+    "##datasubject": {
+      "type": "noun_phrase",
+      "head": "data subject",
+      "determiner": "the",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:datasubject"
+      }
+    },
+    "##datasubject-possessive": {
+      "type": "noun_phrase",
+      "head": "subject",
+      "pre-modifiers": [
+        {
+            "type": "adjective_phrase",
+            "head": "data"
+        }
+          ],
+      "determiner": "the",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:datasubject-possessive"
+      }
+    },
+    "##borrower": {
+      "type": "noun_phrase",
+      "head": "borrower",
+      "determiner": "the",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:borrower"
+      }
+    },
+    "##borrower-possessive": {
+      "type": "noun_phrase",
+      "head": "borrower",
+      "determiner": "the",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:borrower-possessive"
+      }
+    },
+    "##company": {
+      "type": "noun_phrase",
+      "head": "Company Co",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:company"
+      }
+    },
+    "##company-full": {
+      "type": "noun_phrase",
+      "head": "Company Co",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:company"
+      }
+    },
+    "##company-possessive": {
+      "type": "noun_phrase",
+      "determiner": "the",
+      "head": "company",
+      "features": {
+        "@key": "features",
+        "@function": "profile-features",
+        "@arg1": "ln:company-possessive"
+      }
+    }
+  },
+  "dictionary": {
+    "cs:CreditDecision": {
+      "type": "noun_phrase",
+      "head":  "decision",
+      "specifier": "##company-possessive"
+    },
+    "cs:CreditCardApplication": {
+      "type": "noun_phrase",
+      "head":  "application",
+      "specifier": "##borrower-possessive"
+    },
+    "cs:CreditReferencingAgency": {
+      "type": "noun_phrase",
+      "head":  "credit referencing agency"
+    },
+    "cs:low_credit_score": {
+      "type": "noun_phrase",
+      "head":  "low credit score"
+    },
+    "cs:low_affordability": {
+      "type": "noun_phrase",
+      "head":  "low affordability"
+    },
+    "csd:LatePayment": {
+      "type": "noun_phrase",
+      "head":  "late payment"
+    },
+    "csd:MissedPayment": {
+      "type": "noun_phrase",
+      "head":  "missed payment"
+    },
+    "cs:high_indebtedness": {
+      "type": "noun_phrase",
+      "head":  "high indebtedness"
+    },
+    "cs:negative_credit_history": {
+      "type": "noun_phrase",
+      "head":  "negative credit history"
+    },
+    "cs:CreditHistory": {
+      "type": "noun_phrase",
+      "head":  "credit history report"
+    },
+    "cs:LinkedAddressRecord": {
+      "type": "noun_phrase",
+      "head":  "Utility Company"
+    }
+  },
+
+  "context": {
+    "pl": "http://openprovenance.org/ns/plead#",
+    "cs": "http://openprovenance.org/ns/creditscoring#",
+    "csd" : "https://explain.openprovenance.org/creditscoring/ns#"
+  }
+}
