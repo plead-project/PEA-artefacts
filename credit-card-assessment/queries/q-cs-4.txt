@@ -25,3 +25,4 @@ from agent a prov:Agent
 where decision[prov:type] >= 'pl:Decision'
 and recommendation[prov:type] >= 'pl:AutomatedRecommendation'
 and input[prov:type] >= 'pl:Data'
+

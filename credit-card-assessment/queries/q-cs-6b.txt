@@ -5,3 +5,4 @@ prefix app <https://explain.openprovenance.org/creditscoring/>
 select * from recommendation a prov:Entity
 
 where recommendation[prov:type] >= 'pl:AutomatedRecommendation'
+

@@ -19,3 +19,4 @@ from credit_history a prov:Entity
 where decision[prov:type] >= 'pl:RejectionDecision'
 and recommendation[prov:type] >= 'pl:AutomatedRecommendation'
 and credit_history[prov:type] >= 'cs:CreditHistory'
+

@@ -22,3 +22,4 @@ from waw a prov:WasAssociatedWith
 where decision[prov:type] >= 'pl:HumanDecision'
 and officer[prov:type] >= 'prov:Person'
 and review[prov:type] >= 'pl:HumanLedActivity'
+

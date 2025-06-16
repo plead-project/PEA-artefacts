@@ -1,4 +1,5 @@
 document
+
   prefix cs <http://openprovenance.org/ns/creditscoring#>
   prefix pl <http://openprovenance.org/ns/plead#>
   prefix app <https://explain.openprovenance.org/creditscoring/>

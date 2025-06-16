@@ -19,3 +19,4 @@ from prev_application a prov:Entity
 where decision[prov:type] >= 'pl:Decision'
 and prev_decision[prov:type] >= 'pl:Decision'
 and prev_application[prov:type] >= 'pl:SubjectData'
+

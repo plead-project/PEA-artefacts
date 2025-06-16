@@ -13,3 +13,4 @@ from record a prov:Entity
 where decision[prov:type] >= 'pl:Decision'
 and record[prov:type] >= 'cs:CreditRecord'
 group by decision aggregate record with Seq
+

@@ -25,3 +25,4 @@ from applicant a prov:Agent
 where decision[prov:type] >= 'pl:RejectionDecision'
 and application[prov:type] >= 'pl:Request'
 and applicant[prov:type] >= 'pl:DataSubject'
+
