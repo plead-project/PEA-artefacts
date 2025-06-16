@@ -47,3 +47,4 @@ where offer[prov:type]         >= 'sa:AlternativeSchoolPlaceOffer'
  and  alt_school[prov:type]    >= 'sa:School'
  and  school[prov:type]        >= 'sa:School'
  and  preference[sa:preference_order] = 1
+ 

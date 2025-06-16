@@ -46,3 +46,4 @@ group by application aggregate policy, school, rank_position, waiting_place with
 
 
 
+

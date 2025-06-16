@@ -47,3 +47,4 @@ group by policy,school,rank_position, waiting_place aggregate category with Seq 
 
 
 
+
