@@ -2,7 +2,7 @@
 ## Papers
 
 - Core paper: 
-- Supplementary Material: 
+- [Supplementary Material](papers/PEA-supplemental-materials.pdf)
 
 
 ## Example Artefacts from the PEA-Guidelines
