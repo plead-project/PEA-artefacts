@@ -1,8 +1,7 @@
 # Principled Explanability Architecture (PEA)
-## Papers
+## Supplementary Materials 
 
-- Core paper: 
-- [Supplementary Material](papers/PEA-supplemental-materials.pdf)
+- [Supplementary Material](https://openprovenance.susx.ac.uk/people/luc.moreau/papers/PEA-supplemental-materials.pdf)
 
 
 ## Example Artefacts from the PEA-Guidelines
